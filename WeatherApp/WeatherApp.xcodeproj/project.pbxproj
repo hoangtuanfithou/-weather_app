@@ -118,10 +118,10 @@
 		481C37F21E4C05A7000ED7E6 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				488595B91E4C9B9C00DF4FA0 /* BaseViewController.swift */,
 				487743541E4B35BA00ECC3F7 /* ViewController.swift */,
 				481C37EE1E4C0367000ED7E6 /* ViewBusiness.swift */,
 				481C37F01E4C059D000ED7E6 /* DetailViewController.swift */,
-				488595B91E4C9B9C00DF4FA0 /* BaseViewController.swift */,
 			);
 			name = ViewController;
 			sourceTree = "<group>";
@@ -209,16 +209,24 @@
 		487743831E4B3F0500ECC3F7 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				48F310641E4CBCFF0098EAE8 /* WeatherModel */,
 				481C37EA1E4BFBD6000ED7E6 /* BaseModel.swift */,
+				487743891E4B3F0500ECC3F7 /* WeatherResponse.swift */,
+				481C37EC1E4BFC97000ED7E6 /* WeatherRequest.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		48F310641E4CBCFF0098EAE8 /* WeatherModel */ = {
+			isa = PBXGroup;
+			children = (
 				487743841E4B3F0500ECC3F7 /* CurrentCondition.swift */,
 				487743851E4B3F0500ECC3F7 /* Data.swift */,
 				487743861E4B3F0500ECC3F7 /* Request.swift */,
 				487743871E4B3F0500ECC3F7 /* Weather.swift */,
 				487743881E4B3F0500ECC3F7 /* WeatherDesc.swift */,
-				487743891E4B3F0500ECC3F7 /* WeatherResponse.swift */,
-				481C37EC1E4BFC97000ED7E6 /* WeatherRequest.swift */,
 			);
-			path = Model;
+			name = WeatherModel;
 			sourceTree = "<group>";
 		};
 		7A6F7A4739663C8CB1CBA895 /* Frameworks */ = {

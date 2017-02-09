@@ -20,19 +20,19 @@ class DetailViewController: BaseViewController, UITableViewDataSource, SearchWea
     override func viewDidLoad() {
         super.viewDidLoad()
         viewBusiness.delegate = self
-        title = weather?.data?.request?.first?.query
+        title = weather?.city
         refreshControl.addTarget(self, action: #selector(reloadWeatherData), for: .valueChanged)
         detailWeatherTableView.addSubview(refreshControl)
     }
     
     func reloadWeatherData() {
-        if let query = weather?.data?.request?.first?.query {
+        if let query = weather?.city {
             viewBusiness.searchWeather(query: query)
         }
     }
     
     func searchWeatherSuccess(weatherResponse: WeatherResponse) {
-        weather = weatherResponse
+        self.weather = weatherResponse
         detailWeatherTableView.reloadData()
         refreshControl.endRefreshing()
     }
@@ -44,22 +44,21 @@ class DetailViewController: BaseViewController, UITableViewDataSource, SearchWea
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "WeatherNormalCell", for: indexPath)
-        let currentCondition = weather?.data?.currentCondition?.first
         
         switch indexPath.row {
         case 0: // i) Icon Showing Current Weather and City Name
-            cell.textLabel?.text = weather?.data?.request?.first?.query
+            cell.textLabel?.text = weather?.city
             
-            if let urlString = currentCondition?.weatherIconUrl?.first?.value,
+            if let urlString = weather?.weatherIconUrl,
                 let url = URL(string: urlString) {
                 cell.imageView?.sd_setImage(with: url, placeholderImage: #imageLiteral(resourceName: "weather_icon"))
             }
         case 1: // ii) Observation Time
-            cell.textLabel?.text = "Observation Time: " + (currentCondition?.observationTime ?? "")
+            cell.textLabel?.text = "Observation Time: " + (weather?.observationTime ?? "")
         case 2: // iii) humidity
-            cell.textLabel?.text = "Humidity: " + (currentCondition?.humidity ?? "")
+            cell.textLabel?.text = "Humidity: " + (weather?.humidity ?? "")
         case 3: // iv) weather description
-            cell.textLabel?.text = currentCondition?.weatherDesc?.first?.value
+            cell.textLabel?.text = weather?.weatherDescription
         default:
             break
         }
