@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, SearchWeatherDelegate {
+class ViewController: BaseViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, SearchWeatherDelegate {
     
     let viewBusiness = ViewBusiness()
     var histories: [String] = []
@@ -57,8 +57,10 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     func searchWeatherSuccess(weatherResponse: WeatherResponse) {
         if let query = weatherResponse.data?.request?.first?.query {
             viewBusiness.saveSearchHistory(query: query)
+            performSegue(withIdentifier: "ShowDetailView", sender: weatherResponse)
+        } else {
+            showAlert(message: "Unable to find any matching weather location to the query submitted!")
         }
-        performSegue(withIdentifier: "ShowDetailView", sender: weatherResponse)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

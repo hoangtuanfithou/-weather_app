@@ -9,7 +9,7 @@
 import UIKit
 import SDWebImage
 
-class DetailViewController: UIViewController, UITableViewDataSource, SearchWeatherDelegate {
+class DetailViewController: BaseViewController, UITableViewDataSource, SearchWeatherDelegate {
 
     var weather: WeatherResponse?
     let viewBusiness = ViewBusiness()
