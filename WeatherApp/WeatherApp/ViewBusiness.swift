@@ -9,6 +9,7 @@
 import Foundation
 import Alamofire
 import AlamofireObjectMapper
+import SVProgressHUD
 
 protocol SearchWeatherDelegate: class {
     func searchWeatherSuccess(weatherResponse: WeatherResponse)
@@ -16,7 +17,6 @@ protocol SearchWeatherDelegate: class {
 
 class ViewBusiness {
     
-//    weak var viewController: ViewController?
     weak var delegate: SearchWeatherDelegate?
     
     // MARK : Search weather
@@ -25,16 +25,13 @@ class ViewBusiness {
         let weatherRequest = WeatherRequest()
         weatherRequest.query = query
         
+        SVProgressHUD.show()
         Alamofire.request(weatherUrl, method: .get, parameters: weatherRequest.toJSON()).responseObject { (response: DataResponse<WeatherResponse>) in
-            
+            SVProgressHUD.dismiss()
             if response.result.isSuccess && response.response?.statusCode == 200,
                 let weather = response.result.value {
-                print(weather)
                 self.delegate?.searchWeatherSuccess(weatherResponse: weather)
-            } else if response.result.error?._code == NSURLErrorNotConnectedToInternet {
-                
             }
-            
         }
         
     }
@@ -42,14 +39,12 @@ class ViewBusiness {
     // MARK : Search history
     func saveSearchHistory(query: String) {
         let userDefault = UserDefaults.standard
-        
         if var searchHistories = userDefault.array(forKey: searchHistoryKey) {
             searchHistories.insert(query, at: 0)
             userDefault.set(searchHistories, forKey: searchHistoryKey)
         } else {
             userDefault.set([query], forKey: searchHistoryKey)
         }
-        
     }
     
     func getSearchHistories() -> [String] {

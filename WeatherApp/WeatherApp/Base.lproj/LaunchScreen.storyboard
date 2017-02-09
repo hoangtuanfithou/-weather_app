@@ -21,13 +21,17 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="weather_icon" translatesAutoresizingMaskIntoConstraints="NO" id="Qay-9K-jLp">
-                                <rect key="frame" x="123.5" y="269.5" width="128" height="128"/>
+                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="weather_icon" translatesAutoresizingMaskIntoConstraints="NO" id="Qay-9K-jLp">
+                                <rect key="frame" x="155.5" y="271.5" width="64" height="64"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="64" id="Uq6-4C-TKG"/>
+                                    <constraint firstAttribute="height" constant="64" id="eJA-QQ-rdi"/>
+                                </constraints>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="Qay-9K-jLp" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="2g1-xF-VhL"/>
+                            <constraint firstItem="Qay-9K-jLp" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" constant="-30" id="2g1-xF-VhL"/>
                             <constraint firstItem="Qay-9K-jLp" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="8iI-tv-0ny"/>
                         </constraints>
                     </view>

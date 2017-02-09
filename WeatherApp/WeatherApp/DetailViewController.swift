@@ -20,7 +20,7 @@ class DetailViewController: BaseViewController, UITableViewDataSource, SearchWea
     override func viewDidLoad() {
         super.viewDidLoad()
         viewBusiness.delegate = self
-        
+        title = weather?.data?.request?.first?.query
         refreshControl.addTarget(self, action: #selector(reloadWeatherData), for: .valueChanged)
         detailWeatherTableView.addSubview(refreshControl)
     }
