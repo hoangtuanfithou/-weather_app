@@ -54,7 +54,8 @@ class ViewBusiness {
     
     func getSearchHistories() -> [String] {
         if let searchHistories = UserDefaults.standard.array(forKey: searchHistoryKey) as? [String] {
-            return searchHistories
+            let unique = Array(Set(searchHistories))
+            return unique
         }
         return []
     }

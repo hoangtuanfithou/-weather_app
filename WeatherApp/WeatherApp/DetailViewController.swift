@@ -55,9 +55,9 @@ class DetailViewController: UIViewController, UITableViewDataSource, SearchWeath
                 cell.imageView?.sd_setImage(with: url, placeholderImage: #imageLiteral(resourceName: "weather_icon"))
             }
         case 1: // ii) Observation Time
-            cell.textLabel?.text = currentCondition?.observationTime
+            cell.textLabel?.text = "Observation Time: " + (currentCondition?.observationTime ?? "")
         case 2: // iii) humidity
-            cell.textLabel?.text = currentCondition?.humidity
+            cell.textLabel?.text = "Humidity: " + (currentCondition?.humidity ?? "")
         case 3: // iv) weather description
             cell.textLabel?.text = currentCondition?.weatherDesc?.first?.value
         default:

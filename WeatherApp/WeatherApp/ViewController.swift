@@ -21,11 +21,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         viewBusiness.delegate = self
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        historyTableView.reloadData()
-    }
-    
     // MARK : UITableViewDataSource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if searchBar.isFirstResponder {
@@ -43,7 +38,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     // MARK : UISearchBarDelegate
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+        viewBusiness.searchWeather(query: histories[indexPath.row])
     }
     
     // MARK : UISearchBarDelegate
