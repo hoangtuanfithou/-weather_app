@@ -9,7 +9,6 @@
 import Foundation
 import ObjectMapper
 
-// http://api.worldweatheronline.com/free/v1/weather.ashx?key=vzkjnx2j5f88vyn5dhvvqkzc&q=London&fx=yes&format=json
 class WeatherRequest: BaseModel {
     
     var key: String = "vzkjnx2j5f88vyn5dhvvqkzc"
