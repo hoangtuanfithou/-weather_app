@@ -20,7 +20,8 @@ class WeatherResponse: BaseModel {
     
     override func mapping(map: Map) {
         super.mapping(map: map)
-        data <- map["data"] // in case using tool auto gen model
+        // in case using tool auto gen model
+        data <- map["data"]
         
         // in case manual parse
         city <- map["data.request.0.query"]
