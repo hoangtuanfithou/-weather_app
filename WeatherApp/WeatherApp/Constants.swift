@@ -19,4 +19,4 @@ enum DataUsing {
     case CoreData, UserDefault, Realm, Sqlite
 }
 
-let dataUsing = DataUsing.CoreData
+var dataUsing = DataUsing.CoreData

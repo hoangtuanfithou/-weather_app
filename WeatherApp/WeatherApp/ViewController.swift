@@ -56,7 +56,6 @@ class ViewController: BaseViewController, UITableViewDataSource, UITableViewDele
     // MARK: - Navigation
     func searchWeatherSuccess(weatherResponse: WeatherResponse) {
         if let _ = weatherResponse.city {
-            appDelegate.saveContext() // using Core Data
             viewBusiness.saveSearchHistory(weatherResponse: weatherResponse)
             performSegue(withIdentifier: "ShowDetailView", sender: weatherResponse)
         } else {

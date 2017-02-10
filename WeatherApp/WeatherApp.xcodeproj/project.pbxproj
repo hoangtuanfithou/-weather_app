@@ -13,6 +13,21 @@
 		481C37EF1E4C0367000ED7E6 /* ViewBusiness.swift in Sources */ = {isa = PBXBuildFile; fileRef = 481C37EE1E4C0367000ED7E6 /* ViewBusiness.swift */; };
 		481C37F11E4C059D000ED7E6 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 481C37F01E4C059D000ED7E6 /* DetailViewController.swift */; };
 		481C37F81E4C7000000ED7E6 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 481C37F71E4C7000000ED7E6 /* Constants.swift */; };
+		485409EB1E4E2B92005275F0 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 481C37F71E4C7000000ED7E6 /* Constants.swift */; };
+		485409EC1E4E2B92005275F0 /* DataCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 480CC64C1E4D6B6F00609BA0 /* DataCenter.swift */; };
+		485409ED1E4E2B92005275F0 /* CurrentCondition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 487743841E4B3F0500ECC3F7 /* CurrentCondition.swift */; };
+		485409EE1E4E2B92005275F0 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 487743851E4B3F0500ECC3F7 /* Data.swift */; };
+		485409EF1E4E2B92005275F0 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 487743861E4B3F0500ECC3F7 /* Request.swift */; };
+		485409F01E4E2B92005275F0 /* Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 487743871E4B3F0500ECC3F7 /* Weather.swift */; };
+		485409F11E4E2B92005275F0 /* WeatherDesc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 487743881E4B3F0500ECC3F7 /* WeatherDesc.swift */; };
+		485409F21E4E2B92005275F0 /* BaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 481C37EA1E4BFBD6000ED7E6 /* BaseModel.swift */; };
+		485409F31E4E2B92005275F0 /* WeatherResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 487743891E4B3F0500ECC3F7 /* WeatherResponse.swift */; };
+		485409F41E4E2B92005275F0 /* WeatherRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 481C37EC1E4BFC97000ED7E6 /* WeatherRequest.swift */; };
+		485409F51E4E2B92005275F0 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 488595B91E4C9B9C00DF4FA0 /* BaseViewController.swift */; };
+		485409F61E4E2B92005275F0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 487743541E4B35BA00ECC3F7 /* ViewController.swift */; };
+		485409F71E4E2B92005275F0 /* ViewBusiness.swift in Sources */ = {isa = PBXBuildFile; fileRef = 481C37EE1E4C0367000ED7E6 /* ViewBusiness.swift */; };
+		485409F81E4E2B92005275F0 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 481C37F01E4C059D000ED7E6 /* DetailViewController.swift */; };
+		485409F91E4E2B92005275F0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 487743521E4B35BA00ECC3F7 /* AppDelegate.swift */; };
 		487743531E4B35BA00ECC3F7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 487743521E4B35BA00ECC3F7 /* AppDelegate.swift */; };
 		487743551E4B35BA00ECC3F7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 487743541E4B35BA00ECC3F7 /* ViewController.swift */; };
 		487743581E4B35BA00ECC3F7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 487743561E4B35BA00ECC3F7 /* Main.storyboard */; };
@@ -562,6 +577,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				485409EB1E4E2B92005275F0 /* Constants.swift in Sources */,
+				485409EC1E4E2B92005275F0 /* DataCenter.swift in Sources */,
+				485409ED1E4E2B92005275F0 /* CurrentCondition.swift in Sources */,
+				485409EE1E4E2B92005275F0 /* Data.swift in Sources */,
+				485409EF1E4E2B92005275F0 /* Request.swift in Sources */,
+				485409F01E4E2B92005275F0 /* Weather.swift in Sources */,
+				485409F11E4E2B92005275F0 /* WeatherDesc.swift in Sources */,
+				485409F21E4E2B92005275F0 /* BaseModel.swift in Sources */,
+				485409F31E4E2B92005275F0 /* WeatherResponse.swift in Sources */,
+				485409F41E4E2B92005275F0 /* WeatherRequest.swift in Sources */,
+				485409F51E4E2B92005275F0 /* BaseViewController.swift in Sources */,
+				485409F61E4E2B92005275F0 /* ViewController.swift in Sources */,
+				485409F71E4E2B92005275F0 /* ViewBusiness.swift in Sources */,
+				485409F81E4E2B92005275F0 /* DetailViewController.swift in Sources */,
+				485409F91E4E2B92005275F0 /* AppDelegate.swift in Sources */,
 				4877436B1E4B35BA00ECC3F7 /* WeatherAppTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

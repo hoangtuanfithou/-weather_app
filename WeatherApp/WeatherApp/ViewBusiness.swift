@@ -89,13 +89,15 @@ class ViewBusiness {
         } else {
             let savedWeathers = SavedWeatherResponse()
             savedWeathers.weathers = [weatherResponse]
-            userDefault.set(savedWeathers.toJSONString(), forKey: searchHistoryKey)
+            let weatherString = savedWeathers.toJSONString()
+            userDefault.set(weatherString, forKey: searchHistoryKey)
         }
     }
     
     // MARK : Search history using Core Data
     private func getSearchHistoriesCoreData() -> [WeatherResponse] {
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Weather")
+        fetchRequest.fetchLimit = maxHistoryNumber
         do {
             let fetchedEntities = try mainContext.fetch(fetchRequest)
             if let weathers = fetchedEntities as? [WeatherResponse] {
