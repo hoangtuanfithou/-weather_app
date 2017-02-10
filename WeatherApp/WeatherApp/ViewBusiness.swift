@@ -39,29 +39,37 @@ class ViewBusiness {
     }
     
     // MARK : Search history using user default
-    class SavedWeatherResponse: BaseModel {
+    func saveSearchHistory(weatherResponse: WeatherResponse) {
+        switch dataUsing {
+        case .CoreData:
+            saveSearchHistoryCoreData(weatherResponse: weatherResponse)
+        case .UserDefault:
+            saveSearchHistoryUserDefault(weatherResponse: weatherResponse)
+        default:
+            break
+        }
+    }
+    
+    func getSearchHistories() -> [WeatherResponse] {
+        switch dataUsing {
+        case .CoreData:
+            return getSearchHistoriesCoreData()
+        case .UserDefault:
+            return getSearchHistoriesCoreData()
+        default:
+            return []
+        }
+    }
+    
+    // MARK : Search history using user default
+    private class SavedWeatherResponse: BaseModel {
         var weathers: [WeatherResponse]?
         override func mapping(map: Map) {
             weathers <- map["weathers"]
         }
     }
-    
-    func saveSearchHistory(weatherResponse: WeatherResponse) {
-        let userDefault = UserDefaults.standard
-        if let searchHistories = userDefault.string(forKey: searchHistoryKey),
-            let savedWeathers = Mapper<SavedWeatherResponse>().map(JSONString: searchHistories)
-            {
-            savedWeathers.weathers?.insert(weatherResponse, at: 0)
-        
-            userDefault.set(savedWeathers.toJSONString(), forKey: searchHistoryKey)
-        } else {
-            let savedWeathers = SavedWeatherResponse()
-            savedWeathers.weathers = [weatherResponse]
-            userDefault.set(savedWeathers.toJSONString(), forKey: searchHistoryKey)
-        }
-    }
-    
-    func getSearchHistories() -> [WeatherResponse] {
+
+    private func getSearchHistoriesUserDefault() -> [WeatherResponse] {
         if let searchHistories = UserDefaults.standard.string(forKey: searchHistoryKey),
             let savedWeathers = Mapper<SavedWeatherResponse>().map(JSONString: searchHistories),
             let weathers = savedWeathers.weathers {
@@ -70,21 +78,38 @@ class ViewBusiness {
         return []
     }
     
+    private func saveSearchHistoryUserDefault(weatherResponse: WeatherResponse) {
+        let userDefault = UserDefaults.standard
+        if let searchHistories = userDefault.string(forKey: searchHistoryKey),
+            let savedWeathers = Mapper<SavedWeatherResponse>().map(JSONString: searchHistories)
+        {
+            savedWeathers.weathers?.insert(weatherResponse, at: 0)
+            
+            userDefault.set(savedWeathers.toJSONString(), forKey: searchHistoryKey)
+        } else {
+            let savedWeathers = SavedWeatherResponse()
+            savedWeathers.weathers = [weatherResponse]
+            userDefault.set(savedWeathers.toJSONString(), forKey: searchHistoryKey)
+        }
+    }
+    
     // MARK : Search history using Core Data
-    func getSearchHistoriesCoreData() -> [WeatherResponse] {
+    private func getSearchHistoriesCoreData() -> [WeatherResponse] {
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Weather")
         do {
             let fetchedEntities = try mainContext.fetch(fetchRequest)
             if let weathers = fetchedEntities as? [WeatherResponse] {
                 return weathers
             }
-
         } catch {
             return []
         }
         return []
     }
-    
+
+    private func saveSearchHistoryCoreData(weatherResponse: WeatherResponse) {
+        appDelegate.saveContext()
+    }
+
     // MARK : Search history using Realm
-    
 }
