@@ -59,7 +59,6 @@ class ViewController: BaseViewController, UITableViewDataSource, UITableViewDele
             viewBusiness.saveSearchHistory(weatherResponse: weatherResponse)
             performSegue(withIdentifier: "ShowDetailView", sender: weatherResponse)
         } else {
-            mainContext.rollback()
             showAlert(message: "Unable to find any matching weather location to the query submitted!")
         }
     }

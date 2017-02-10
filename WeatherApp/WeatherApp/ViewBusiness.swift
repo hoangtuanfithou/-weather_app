@@ -81,8 +81,7 @@ class ViewBusiness {
     private func saveSearchHistoryUserDefault(weatherResponse: WeatherResponse) {
         let userDefault = UserDefaults.standard
         if let searchHistories = userDefault.string(forKey: searchHistoryKey),
-            let savedWeathers = Mapper<SavedWeatherResponse>().map(JSONString: searchHistories)
-        {
+            let savedWeathers = Mapper<SavedWeatherResponse>().map(JSONString: searchHistories) {
             savedWeathers.weathers?.insert(weatherResponse, at: 0)
             
             userDefault.set(savedWeathers.toJSONString(), forKey: searchHistoryKey)
@@ -97,6 +96,8 @@ class ViewBusiness {
     // MARK : Search history using Core Data
     private func getSearchHistoriesCoreData() -> [WeatherResponse] {
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Weather")
+        let sortDescriptor = NSSortDescriptor(key: "createdDate", ascending: false)
+        fetchRequest.sortDescriptors = [sortDescriptor]
         fetchRequest.fetchLimit = maxHistoryNumber
         do {
             let fetchedEntities = try mainContext.fetch(fetchRequest)
@@ -110,6 +111,7 @@ class ViewBusiness {
     }
 
     private func saveSearchHistoryCoreData(weatherResponse: WeatherResponse) {
+        mainContext.insert(weatherResponse)
         appDelegate.saveContext()
     }
 

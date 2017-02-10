@@ -18,15 +18,18 @@ class WeatherResponse: NSManagedObject, Mappable {
     @NSManaged var observationTime: String?
     @NSManaged var humidity: String?
     @NSManaged var weatherDescription: String?
-    
+
+    @NSManaged var createdDate: NSDate?
+
     override init(entity: NSEntityDescription, insertInto context: NSManagedObjectContext?) {
         super.init(entity: entity, insertInto: mainContext)
     }
     
     required init?(map: Map) {
         let entity = NSEntityDescription.entity(forEntityName: "Weather", in: mainContext)
-        super.init(entity: entity!, insertInto: mainContext)
+        super.init(entity: entity!, insertInto: nil)
         
+        createdDate = NSDate()
         mapping(map: map)
     }
 
