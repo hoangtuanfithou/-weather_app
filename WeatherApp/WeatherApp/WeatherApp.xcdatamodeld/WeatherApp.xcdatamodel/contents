@@ -8,6 +8,6 @@
         <attribute name="weatherIconUrl" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Weather" positionX="-63" positionY="-18" width="128" height="120"/>
+        <element name="Weather" positionX="-63" positionY="-18" width="128" height="118"/>
     </elements>
 </model>
