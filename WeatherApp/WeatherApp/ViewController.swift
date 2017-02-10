@@ -11,7 +11,7 @@ import UIKit
 class ViewController: BaseViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, SearchWeatherDelegate {
     
     let viewBusiness = ViewBusiness()
-    var histories: [String] = []
+    var histories: [WeatherResponse] = []
     
     @IBOutlet weak var historyTableView: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
@@ -32,13 +32,13 @@ class ViewController: BaseViewController, UITableViewDataSource, UITableViewDele
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "HistoryCell", for: indexPath)
-        cell.textLabel?.text = histories[indexPath.row]
+        cell.textLabel?.text = histories[indexPath.row].city
         return cell
     }
     
     // MARK : UISearchBarDelegate
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        viewBusiness.searchWeather(query: histories[indexPath.row])
+        performSegue(withIdentifier: "ShowDetailView", sender: histories[indexPath.row])
     }
     
     // MARK : UISearchBarDelegate
@@ -55,11 +55,12 @@ class ViewController: BaseViewController, UITableViewDataSource, UITableViewDele
     
     // MARK: - Navigation
     func searchWeatherSuccess(weatherResponse: WeatherResponse) {
-        appDelegate.saveContext() // using Core Data
-        if let query = weatherResponse.city {
-            viewBusiness.saveSearchHistory(query: query)
+        if let _ = weatherResponse.city {
+            appDelegate.saveContext() // using Core Data
+            viewBusiness.saveSearchHistory(weatherResponse: weatherResponse)
             performSegue(withIdentifier: "ShowDetailView", sender: weatherResponse)
         } else {
+            mainContext.rollback()
             showAlert(message: "Unable to find any matching weather location to the query submitted!")
         }
     }
