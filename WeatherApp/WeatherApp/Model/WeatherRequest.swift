@@ -11,7 +11,7 @@ import ObjectMapper
 
 class WeatherRequest: BaseModel {
     
-    var key: String = "vzkjnx2j5f88vyn5dhvvqkzc"
+    var key: String = requestKey
     var fx: Bool = true
     var format: String = "json"
     var query: String?

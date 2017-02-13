@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: BaseViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, SearchWeatherDelegate {
+class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate {
     
     let viewBusiness = ViewBusiness()
     var histories: [WeatherResponse] = []
@@ -18,7 +18,6 @@ class ViewController: BaseViewController, UITableViewDataSource, UITableViewDele
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        viewBusiness.delegate = self
     }
     
     // MARK : UITableViewDataSource
@@ -48,9 +47,12 @@ class ViewController: BaseViewController, UITableViewDataSource, UITableViewDele
     }
     
     public func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        if let query = searchBar.text {
-            viewBusiness.searchWeather(query: query)
+        guard let query = searchBar.text, !query.isEmpty else {
+            return
         }
+        viewBusiness.searchWeather(query: query, callBack: { [weak self] weatherResponse in
+            self?.searchWeatherSuccess(weatherResponse: weatherResponse)
+        })
     }
     
     // MARK: - Navigation
@@ -69,6 +71,12 @@ class ViewController: BaseViewController, UITableViewDataSource, UITableViewDele
             let weather = sender as? WeatherResponse {
             detailView.weather = weather
         }
+    }
+    
+    private func showAlert(message: String) {
+        let alert = UIAlertController(title: "Alert", message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
     }
     
 }

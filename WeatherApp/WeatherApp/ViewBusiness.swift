@@ -13,16 +13,10 @@ import SVProgressHUD
 import CoreData
 import ObjectMapper
 
-protocol SearchWeatherDelegate: class {
-    func searchWeatherSuccess(weatherResponse: WeatherResponse)
-}
-
 class ViewBusiness {
-    
-    weak var delegate: SearchWeatherDelegate?
-    
+        
     // MARK : Search weather
-    func searchWeather(query: String) {
+    func searchWeather(query: String, callBack: @escaping (WeatherResponse) -> Void) {
         
         let weatherRequest = WeatherRequest()
         weatherRequest.query = query
@@ -32,7 +26,7 @@ class ViewBusiness {
             SVProgressHUD.dismiss()
             if response.result.isSuccess && response.response?.statusCode == 200,
                 let weather = response.result.value {
-                self.delegate?.searchWeatherSuccess(weatherResponse: weather)
+                callBack(weather)
             }
         }
         

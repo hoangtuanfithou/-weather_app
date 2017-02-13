@@ -9,7 +9,7 @@
 import UIKit
 import SDWebImage
 
-class DetailViewController: BaseViewController, UITableViewDataSource, SearchWeatherDelegate {
+class DetailViewController: UIViewController, UITableViewDataSource {
 
     var weather: WeatherResponse?
     let viewBusiness = ViewBusiness()
@@ -19,16 +19,18 @@ class DetailViewController: BaseViewController, UITableViewDataSource, SearchWea
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        viewBusiness.delegate = self
         title = weather?.city
         refreshControl.addTarget(self, action: #selector(reloadWeatherData), for: .valueChanged)
         detailWeatherTableView.addSubview(refreshControl)
     }
     
     func reloadWeatherData() {
-        if let query = weather?.city {
-            viewBusiness.searchWeather(query: query)
+        guard let query = weather?.city else {
+            return
         }
+        viewBusiness.searchWeather(query: query, callBack: { [weak self] weatherResponse in
+            self?.searchWeatherSuccess(weatherResponse: weatherResponse)
+        })
     }
     
     func searchWeatherSuccess(weatherResponse: WeatherResponse) {
