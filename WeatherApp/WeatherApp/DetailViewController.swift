@@ -27,7 +27,7 @@ class DetailViewController: UIViewController, UITableViewDataSource {
         guard let query = weather?.city else {
             return
         }
-        ViewBusiness.searchWeather(query: query, callBack: { [weak self] weatherResponse in
+        WeatherBusiness.searchWeather(query: query, callBack: { [weak self] weatherResponse in
             self?.searchWeatherSuccess(weatherResponse: weatherResponse)
         })
     }

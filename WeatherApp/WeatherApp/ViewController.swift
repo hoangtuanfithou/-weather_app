@@ -41,7 +41,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     // MARK : UISearchBarDelegate
     public func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
-        histories = ViewBusiness.getSearchHistories()
+        histories = WeatherBusiness.getSearchHistories()
         historyTableView.reloadData()
     }
     
@@ -49,7 +49,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         guard let query = searchBar.text, !query.isEmpty else {
             return
         }
-        ViewBusiness.searchWeather(query: query, callBack: { [weak self] weatherResponse in
+        WeatherBusiness.searchWeather(query: query, callBack: { [weak self] weatherResponse in
             self?.searchWeatherSuccess(weatherResponse: weatherResponse)
         })
     }
@@ -57,7 +57,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     // MARK: - Navigation
     func searchWeatherSuccess(weatherResponse: WeatherResponse) {
         if let _ = weatherResponse.city {
-            ViewBusiness.saveSearchHistory(weatherResponse: weatherResponse)
+            WeatherBusiness.saveSearchHistory(weatherResponse: weatherResponse)
             performSegue(withIdentifier: "ShowDetailView", sender: weatherResponse)
         } else {
             showAlert(message: "Unable to find any matching weather location to the query submitted!")

@@ -1,5 +1,5 @@
 //
-//  ViewBusiness.swift
+//  WeatherBusiness.swift
 //  WeatherApp
 //
 //  Created by Nguyen Hoang Tuan on 2/9/17.
@@ -13,11 +13,10 @@ import SVProgressHUD
 import CoreData
 import ObjectMapper
 
-class ViewBusiness {
+class WeatherBusiness {
         
     // MARK : Search weather
     class func searchWeather(query: String, callBack: @escaping (WeatherResponse) -> Void) {
-        
         let weatherRequest = WeatherRequest()
         weatherRequest.query = query
         
@@ -29,7 +28,6 @@ class ViewBusiness {
                 callBack(weather)
             }
         }
-        
     }
     
     // MARK : Search history using user default
