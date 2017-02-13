@@ -7,42 +7,21 @@
 
 import Foundation
 import ObjectMapper
-import CoreData
 
-class WeatherResponse: NSManagedObject, Mappable {
-
-    var data: Data?
-    
-    @NSManaged var city: String?
-    @NSManaged var weatherIconUrl: String?
-    @NSManaged var observationTime: String?
-    @NSManaged var humidity: String?
-    @NSManaged var weatherDescription: String?
-
-    @NSManaged var createdDate: NSDate?
-
-    override init(entity: NSEntityDescription, insertInto context: NSManagedObjectContext?) {
-        super.init(entity: entity, insertInto: mainContext)
-    }
-    
-    required init?(map: Map) {
-        let entity = NSEntityDescription.entity(forEntityName: "Weather", in: mainContext)
-        super.init(entity: entity!, insertInto: nil)
+class WeatherResponse: BaseModel {
         
-        createdDate = NSDate()
-        mapping(map: map)
-    }
-
-    func mapping(map: Map) {
-        // in case using tool auto gen model
-        data <- map["data"]
-        
-        // in case manual parse
+    var city: String?
+    var weatherIconUrl: String?
+    var observationTime: String?
+    var humidity: String?
+    var weatherDescription: String?
+    
+    override func mapping(map: Map) {
         city <- map["data.request.0.query"]
         weatherIconUrl <- map["data.current_condition.0.weatherIconUrl.0.value"]
         observationTime <- map["data.current_condition.0.observation_time"]
         humidity <- map["data.current_condition.0.humidity"]
         weatherDescription <- map["data.current_condition.0.weatherDesc.0.value"]
     }
-
+    
 }

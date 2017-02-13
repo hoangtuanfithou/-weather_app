@@ -32,45 +32,6 @@ class WeatherBusiness {
     
     // MARK : Search history using user default
     class func saveSearchHistory(weatherResponse: WeatherResponse) {
-        switch dataUsing {
-        case .CoreData:
-            saveSearchHistoryCoreData(weatherResponse: weatherResponse)
-        case .UserDefault:
-            saveSearchHistoryUserDefault(weatherResponse: weatherResponse)
-        default:
-            break
-        }
-    }
-    
-    class func getSearchHistories() -> [WeatherResponse] {
-        switch dataUsing {
-        case .CoreData:
-            return getSearchHistoriesCoreData()
-        case .UserDefault:
-            return getSearchHistoriesUserDefault()
-        default:
-            return []
-        }
-    }
-    
-    // MARK : Search history using user default
-    private class SavedWeatherResponse: BaseModel {
-        var weathers: [WeatherResponse]?
-        override func mapping(map: Map) {
-            weathers <- map["weathers"]
-        }
-    }
-
-    private class func getSearchHistoriesUserDefault() -> [WeatherResponse] {
-        if let searchHistories = UserDefaults.standard.string(forKey: searchHistoryKey),
-            let savedWeathers = Mapper<SavedWeatherResponse>().map(JSONString: searchHistories),
-            let weathers = savedWeathers.weathers {
-            return weathers
-        }
-        return []
-    }
-    
-    private class func saveSearchHistoryUserDefault(weatherResponse: WeatherResponse) {
         let userDefault = UserDefaults.standard
         if let searchHistories = userDefault.string(forKey: searchHistoryKey),
             let savedWeathers = Mapper<SavedWeatherResponse>().map(JSONString: searchHistories) {
@@ -88,26 +49,13 @@ class WeatherBusiness {
         }
     }
     
-    // MARK : Search history using Core Data
-    private class func getSearchHistoriesCoreData() -> [WeatherResponse] {
-        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Weather")
-        let sortDescriptor = NSSortDescriptor(key: "createdDate", ascending: false)
-        fetchRequest.sortDescriptors = [sortDescriptor]
-        fetchRequest.fetchLimit = maxHistoryNumber
-        do {
-            let fetchedEntities = try mainContext.fetch(fetchRequest)
-            if let weathers = fetchedEntities as? [WeatherResponse] {
-                return weathers
-            }
-        } catch {
-            return []
+    class func getSearchHistories() -> [WeatherResponse] {
+        if let searchHistories = UserDefaults.standard.string(forKey: searchHistoryKey),
+            let savedWeathers = Mapper<SavedWeatherResponse>().map(JSONString: searchHistories),
+            let weathers = savedWeathers.weathers {
+            return weathers
         }
         return []
-    }
-
-    private class func saveSearchHistoryCoreData(weatherResponse: WeatherResponse) {
-        mainContext.insert(weatherResponse)
-        appDelegate.saveContext()
     }
 
 }
