@@ -77,6 +77,9 @@ class ViewBusiness {
         if let searchHistories = userDefault.string(forKey: searchHistoryKey),
             let savedWeathers = Mapper<SavedWeatherResponse>().map(JSONString: searchHistories) {
             savedWeathers.weathers?.insert(weatherResponse, at: 0)
+            if savedWeathers.weathers?.count ?? 0 > maxHistoryNumber {
+                savedWeathers.weathers?.removeLast()
+            }
             
             userDefault.set(savedWeathers.toJSONString(), forKey: searchHistoryKey)
         } else {
@@ -109,5 +112,4 @@ class ViewBusiness {
         appDelegate.saveContext()
     }
 
-    // MARK : Search history using Realm
 }
