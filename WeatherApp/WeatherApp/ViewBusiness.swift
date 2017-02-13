@@ -16,7 +16,7 @@ import ObjectMapper
 class ViewBusiness {
         
     // MARK : Search weather
-    func searchWeather(query: String, callBack: @escaping (WeatherResponse) -> Void) {
+    class func searchWeather(query: String, callBack: @escaping (WeatherResponse) -> Void) {
         
         let weatherRequest = WeatherRequest()
         weatherRequest.query = query
@@ -33,7 +33,7 @@ class ViewBusiness {
     }
     
     // MARK : Search history using user default
-    func saveSearchHistory(weatherResponse: WeatherResponse) {
+    class func saveSearchHistory(weatherResponse: WeatherResponse) {
         switch dataUsing {
         case .CoreData:
             saveSearchHistoryCoreData(weatherResponse: weatherResponse)
@@ -44,12 +44,12 @@ class ViewBusiness {
         }
     }
     
-    func getSearchHistories() -> [WeatherResponse] {
+    class func getSearchHistories() -> [WeatherResponse] {
         switch dataUsing {
         case .CoreData:
             return getSearchHistoriesCoreData()
         case .UserDefault:
-            return getSearchHistoriesCoreData()
+            return getSearchHistoriesUserDefault()
         default:
             return []
         }
@@ -63,7 +63,7 @@ class ViewBusiness {
         }
     }
 
-    private func getSearchHistoriesUserDefault() -> [WeatherResponse] {
+    private class func getSearchHistoriesUserDefault() -> [WeatherResponse] {
         if let searchHistories = UserDefaults.standard.string(forKey: searchHistoryKey),
             let savedWeathers = Mapper<SavedWeatherResponse>().map(JSONString: searchHistories),
             let weathers = savedWeathers.weathers {
@@ -72,7 +72,7 @@ class ViewBusiness {
         return []
     }
     
-    private func saveSearchHistoryUserDefault(weatherResponse: WeatherResponse) {
+    private class func saveSearchHistoryUserDefault(weatherResponse: WeatherResponse) {
         let userDefault = UserDefaults.standard
         if let searchHistories = userDefault.string(forKey: searchHistoryKey),
             let savedWeathers = Mapper<SavedWeatherResponse>().map(JSONString: searchHistories) {
@@ -88,7 +88,7 @@ class ViewBusiness {
     }
     
     // MARK : Search history using Core Data
-    private func getSearchHistoriesCoreData() -> [WeatherResponse] {
+    private class func getSearchHistoriesCoreData() -> [WeatherResponse] {
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Weather")
         let sortDescriptor = NSSortDescriptor(key: "createdDate", ascending: false)
         fetchRequest.sortDescriptors = [sortDescriptor]
@@ -104,7 +104,7 @@ class ViewBusiness {
         return []
     }
 
-    private func saveSearchHistoryCoreData(weatherResponse: WeatherResponse) {
+    private class func saveSearchHistoryCoreData(weatherResponse: WeatherResponse) {
         mainContext.insert(weatherResponse)
         appDelegate.saveContext()
     }
