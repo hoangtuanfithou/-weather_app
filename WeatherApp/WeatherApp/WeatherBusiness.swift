@@ -34,12 +34,21 @@ class WeatherBusiness {
     class func saveSearchHistory(weatherResponse: WeatherResponse) {
         let userDefault = UserDefaults.standard
         if let searchHistories = userDefault.string(forKey: searchHistoryKey),
-            let savedWeathers = Mapper<SavedWeatherResponse>().map(JSONString: searchHistories) {
-            savedWeathers.weathers?.insert(weatherResponse, at: 0)
-            if savedWeathers.weathers?.count ?? 0 > maxHistoryNumber {
-                savedWeathers.weathers?.removeLast()
-            }
+            let savedWeathers = Mapper<SavedWeatherResponse>().map(JSONString: searchHistories),
+            let weathers = savedWeathers.weathers {
             
+            // remove duplicate
+            var uniqueWeathers = weathers.filter({ (weather) -> Bool in
+                return weather.city != weatherResponse.city
+            })
+            
+            // insert
+            uniqueWeathers.insert(weatherResponse, at: 0)
+            
+            let limitWeathers = Array(uniqueWeathers.prefix(maxHistoryNumber))
+            
+            // save
+            savedWeathers.weathers = limitWeathers
             userDefault.set(savedWeathers.toJSONString(), forKey: searchHistoryKey)
         } else {
             let savedWeathers = SavedWeatherResponse()

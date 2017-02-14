@@ -13,6 +13,8 @@
 		481C37F11E4C059D000ED7E6 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 481C37F01E4C059D000ED7E6 /* DetailViewController.swift */; };
 		481C37F81E4C7000000ED7E6 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 481C37F71E4C7000000ED7E6 /* Constants.swift */; };
 		485409F71E4E2B92005275F0 /* WeatherBusiness.swift in Sources */ = {isa = PBXBuildFile; fileRef = 481C37EE1E4C0367000ED7E6 /* WeatherBusiness.swift */; };
+		4868F6E91E52A86D002AF61B /* WeatherBusinessTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48EEE43F1E519D03001D1A54 /* WeatherBusinessTests.swift */; };
+		4868F6EA1E52A870002AF61B /* WeatherAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4877436A1E4B35BA00ECC3F7 /* WeatherAppTests.swift */; };
 		487743531E4B35BA00ECC3F7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 487743521E4B35BA00ECC3F7 /* AppDelegate.swift */; };
 		487743551E4B35BA00ECC3F7 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 487743541E4B35BA00ECC3F7 /* SearchViewController.swift */; };
 		487743581E4B35BA00ECC3F7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 487743561E4B35BA00ECC3F7 /* Main.storyboard */; };
@@ -523,10 +525,10 @@
 				481C37F11E4C059D000ED7E6 /* DetailViewController.swift in Sources */,
 				4877435B1E4B35BA00ECC3F7 /* WeatherApp.xcdatamodeld in Sources */,
 				481C37EB1E4BFBD6000ED7E6 /* BaseModel.swift in Sources */,
-				48784E7B1E51D1DB00699337 /* SavedWeatherResponse.swift in Sources */,
 				481C37ED1E4BFC97000ED7E6 /* WeatherRequest.swift in Sources */,
 				487743551E4B35BA00ECC3F7 /* SearchViewController.swift in Sources */,
 				487743531E4B35BA00ECC3F7 /* AppDelegate.swift in Sources */,
+				48784E7B1E51D1DB00699337 /* SavedWeatherResponse.swift in Sources */,
 				481C37EF1E4C0367000ED7E6 /* WeatherBusiness.swift in Sources */,
 				481C37F81E4C7000000ED7E6 /* Constants.swift in Sources */,
 				4877438F1E4B3F0500ECC3F7 /* WeatherResponse.swift in Sources */,
@@ -542,7 +544,9 @@
 				48784E771E51D06100699337 /* BaseModel.swift in Sources */,
 				48784E761E51D05600699337 /* WeatherResponse.swift in Sources */,
 				485409F71E4E2B92005275F0 /* WeatherBusiness.swift in Sources */,
+				4868F6EA1E52A870002AF61B /* WeatherAppTests.swift in Sources */,
 				48784E7C1E51D1DB00699337 /* SavedWeatherResponse.swift in Sources */,
+				4868F6E91E52A86D002AF61B /* WeatherBusinessTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
