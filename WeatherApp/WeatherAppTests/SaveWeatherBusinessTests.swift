@@ -58,6 +58,7 @@ class SaveWeatherBusinessTests: XCTestCase {
             SaveWeatherBusiness.saveSearchHistory(weatherResponse: weatherRespone)
         }
         XCTAssert(SaveWeatherBusiness.getSearchHistories().count == maxHistoryNumber, "Save \(maxHistoryNumber) items to UserDefault")
+        XCTAssertFalse(SaveWeatherBusiness.getSearchHistories().count > maxHistoryNumber)
     }
     
     private func clearUserDefault() {

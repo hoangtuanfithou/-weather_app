@@ -18,8 +18,7 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
     // MARK : UITableViewDataSource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if searchBar.isFirstResponder {
-            let historiesCount = histories.count > maxHistoryNumber ? maxHistoryNumber : histories.count
-            return historiesCount
+            return histories.count
         }
         return 0
     }
@@ -42,10 +41,7 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
     }
     
     public func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        guard let query = searchBar.text, !query.isEmpty else {
-            return
-        }
-        SearchWeatherBusiness.searchWeather(query: query, callBack: { [weak self] weatherResponse in
+        SearchWeatherBusiness.searchWeather(query: searchBar.text, callBack: { [weak self] weatherResponse in
             self?.searchWeatherSuccess(weatherResponse: weatherResponse)
         })
     }

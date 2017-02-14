@@ -24,8 +24,14 @@ class SearchWeatherBusinessTests: XCTestCase {
     }
     
     func testSearchWeather() {
+        let searchExpectation = expectation(description: "server return")
         SearchWeatherBusiness.searchWeather(query: "London") { (weatherResponse) in
+            searchExpectation.fulfill()
+            
             XCTAssert(weatherResponse.city == "London", "Search weather London")
+        }
+        waitForExpectations(timeout: 60) { (error) in
+            
         }
     }
     
