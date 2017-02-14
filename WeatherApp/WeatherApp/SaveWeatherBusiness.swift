@@ -1,34 +1,15 @@
 //
-//  WeatherBusiness.swift
+//  SaveWeathersBusiness.swift
 //  WeatherApp
 //
-//  Created by Nguyen Hoang Tuan on 2/9/17.
+//  Created by Nguyen Hoang Tuan on 2/14/17.
 //  Copyright © 2017 NHT. All rights reserved.
 //
 
 import Foundation
-import Alamofire
-import AlamofireObjectMapper
-import SVProgressHUD
-import CoreData
 import ObjectMapper
 
-class WeatherBusiness {
-        
-    // MARK : Search weather
-    class func searchWeather(query: String, callBack: @escaping (WeatherResponse) -> Void) {
-        let weatherRequest = WeatherRequest()
-        weatherRequest.query = query
-        
-        SVProgressHUD.show()
-        Alamofire.request(weatherUrl, method: .get, parameters: weatherRequest.toJSON()).responseObject { (response: DataResponse<WeatherResponse>) in
-            SVProgressHUD.dismiss()
-            if response.result.isSuccess && response.response?.statusCode == 200,
-                let weather = response.result.value {
-                callBack(weather)
-            }
-        }
-    }
+class SaveWeatherBusiness {
     
     // MARK : Search history using user default
     class func saveSearchHistory(weatherResponse: WeatherResponse) {
