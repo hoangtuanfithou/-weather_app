@@ -18,13 +18,14 @@ class SaveWeatherBusinessTests: XCTestCase {
     override func tearDown() {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
         super.tearDown()
+        clearUserDefault()
     }
 
     func testSaveSearchHistory() {
         clearUserDefault()
         
         let weatherRespone = WeatherResponse()
-        weatherRespone.city = "London1"
+        weatherRespone.city = "London 1"
         SaveWeatherBusiness.saveSearchHistory(weatherResponse: weatherRespone)
         
         // get
@@ -32,7 +33,7 @@ class SaveWeatherBusinessTests: XCTestCase {
         XCTAssert(savedWeathers.count == 1, "Save 1 items to UserDefault")
         
         // save 2nd items
-        weatherRespone.city = "London2"
+        weatherRespone.city = "London 2"
         SaveWeatherBusiness.saveSearchHistory(weatherResponse: weatherRespone)
         XCTAssert(SaveWeatherBusiness.getSearchHistories().count == 2, "Save 2 items to UserDefault")
     }
@@ -61,12 +62,6 @@ class SaveWeatherBusinessTests: XCTestCase {
         XCTAssertFalse(SaveWeatherBusiness.getSearchHistories().count > maxHistoryNumber)
     }
     
-    private func clearUserDefault() {
-        if let bundle = Bundle.main.bundleIdentifier {
-            UserDefaults.standard.removePersistentDomain(forName: bundle)
-        }
-    }
-    
     func testGetSearchHistories() {
         clearUserDefault()
         XCTAssert(SaveWeatherBusiness.getSearchHistories().count == 0, "No items to UserDefault")
@@ -79,6 +74,12 @@ class SaveWeatherBusinessTests: XCTestCase {
         // get
         let savedWeathers = SaveWeatherBusiness.getSearchHistories()
         XCTAssert(savedWeathers.count == 1, "Save 1 items to UserDefault")
+    }
+    
+    private func clearUserDefault() {
+        if let bundle = Bundle.main.bundleIdentifier {
+            UserDefaults.standard.removePersistentDomain(forName: bundle)
+        }
     }
 
 }

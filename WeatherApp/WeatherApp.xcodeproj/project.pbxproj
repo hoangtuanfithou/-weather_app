@@ -195,8 +195,8 @@
 			isa = PBXGroup;
 			children = (
 				4877436A1E4B35BA00ECC3F7 /* WeatherAppTests.swift */,
-				485BA5F11E52F4F800D6D400 /* SaveWeatherBusinessTests.swift */,
 				48EEE43F1E519D03001D1A54 /* SearchWeatherBusinessTests.swift */,
+				485BA5F11E52F4F800D6D400 /* SaveWeatherBusinessTests.swift */,
 				4877436C1E4B35BA00ECC3F7 /* Info.plist */,
 			);
 			path = WeatherAppTests;

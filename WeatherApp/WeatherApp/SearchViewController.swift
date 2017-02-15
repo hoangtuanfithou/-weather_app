@@ -41,7 +41,10 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
     }
     
     public func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        SearchWeatherBusiness.searchWeather(query: searchBar.text, callBack: { [weak self] weatherResponse in
+        guard let query = searchBar.text, !query.isEmpty else {
+            return
+        }
+        SearchWeatherBusiness.searchWeather(query: query, callBack: { [weak self] weatherResponse in
             self?.searchWeatherSuccess(weatherResponse: weatherResponse)
         })
     }

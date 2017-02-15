@@ -14,10 +14,7 @@ import CoreData
 class SearchWeatherBusiness {
         
     // MARK : Search weather
-    class func searchWeather(query: String?, callBack: @escaping (WeatherResponse) -> Void) {
-        guard let validQuery = query, !validQuery.isEmpty else {
-            return
-        }
+    class func searchWeather(query: String, callBack: @escaping (WeatherResponse) -> Void) {
         let weatherRequest = WeatherRequest()
         weatherRequest.query = query
         

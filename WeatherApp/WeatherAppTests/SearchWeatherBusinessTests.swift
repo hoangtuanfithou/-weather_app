@@ -23,15 +23,25 @@ class SearchWeatherBusinessTests: XCTestCase {
         super.tearDown()
     }
     
-    func testSearchWeather() {
+    func testSearchValidWeather() {
         let searchExpectation = expectation(description: "server return")
         SearchWeatherBusiness.searchWeather(query: "London") { (weatherResponse) in
+            if weatherResponse.city != nil {
+                XCTAssert(weatherResponse.city == "London", "Search weather London")
+            }
             searchExpectation.fulfill()
-            
-            XCTAssert(weatherResponse.city == "London", "Search weather London")
         }
         waitForExpectations(timeout: 60) { (error) in
-            
+        }
+    }
+    
+    func testSearchNotValidWeather() {
+        let searchExpectation = expectation(description: "server return")
+        SearchWeatherBusiness.searchWeather(query: "123") { (weatherResponse) in
+            XCTAssert(weatherResponse.city == nil, "No valid city")
+            searchExpectation.fulfill()
+        }
+        waitForExpectations(timeout: 60) { (error) in
         }
     }
     

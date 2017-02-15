@@ -24,7 +24,10 @@ class DetailViewController: UIViewController, UITableViewDataSource {
     }
     
     func reloadWeatherData() {
-        SearchWeatherBusiness.searchWeather(query: weather?.city, callBack: { [weak self] weatherResponse in
+        guard let query = weather?.city else {
+            return
+        }
+        SearchWeatherBusiness.searchWeather(query: query, callBack: { [weak self] weatherResponse in
             self?.searchWeatherSuccess(weatherResponse: weatherResponse)
         })
     }
@@ -49,16 +52,12 @@ class DetailViewController: UIViewController, UITableViewDataSource {
             
             if let urlString = weather?.weatherIconUrl,
                 let url = URL(string: urlString) {
-                cell.imageView?.sd_setShowActivityIndicatorView(true)
                 cell.imageView?.sd_setImage(with: url, placeholderImage: #imageLiteral(resourceName: "weather_icon"))
             }
-            
         case 1: // ii) Observation Time
             cell.textLabel?.text = "Observation Time: " + (weather?.observationTime ?? "")
-            
         case 2: // iii) humidity
             cell.textLabel?.text = "Humidity: " + (weather?.humidity ?? "")
-            
         case 3: // iv) weather description
             cell.textLabel?.text = weather?.weatherDescription
         default:
