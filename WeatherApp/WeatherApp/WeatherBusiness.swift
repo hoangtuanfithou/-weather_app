@@ -12,6 +12,7 @@ import AlamofireObjectMapper
 import SVProgressHUD
 import CoreData
 import ObjectMapper
+import RealmSwift
 
 class WeatherBusiness {
         
@@ -33,6 +34,8 @@ class WeatherBusiness {
     // MARK : Search history using user default
     class func saveSearchHistory(weatherResponse: WeatherResponse) {
         switch dataUsing {
+        case .Realm:
+            saveSearchHistoryRealm(weatherResponse: weatherResponse)
         case .CoreData:
             saveSearchHistoryCoreData(weatherResponse: weatherResponse)
         case .UserDefault:
@@ -44,6 +47,8 @@ class WeatherBusiness {
     
     class func getSearchHistories() -> [WeatherResponse] {
         switch dataUsing {
+        case .Realm:
+            return getSearchHistoriesRealm()
         case .CoreData:
             return getSearchHistoriesCoreData()
         case .UserDefault:
@@ -105,9 +110,24 @@ class WeatherBusiness {
         return []
     }
 
-    private class func saveSearchHistoryCoreData(weatherResponse: WeatherResponse) {
-        mainContext.insert(weatherResponse)
+    private class func saveSearchHistoryCoreData(weatherResponse: WeatherResponse) {        
+//        mainContext.insert(weatherResponse)
         appDelegate.saveContext()
+    }
+    
+    // MARK : Search history using Realm
+    private class func saveSearchHistoryRealm(weatherResponse: WeatherResponse) {
+        let realm = try! Realm()
+        try! realm.write() {
+            weatherResponse.createdDate = NSDate()
+            realm.add(weatherResponse)
+        }
+    }
+    
+    private class func getSearchHistoriesRealm() -> [WeatherResponse] {
+        let realm = try! Realm()
+        let weathers = realm.objects(WeatherResponse.self).sorted(byKeyPath: "createdDate", ascending: false)
+        return Array(weathers)
     }
 
 }

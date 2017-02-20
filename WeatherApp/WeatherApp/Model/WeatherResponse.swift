@@ -8,8 +8,9 @@
 import Foundation
 import ObjectMapper
 import CoreData
+import RealmSwift
 
-class WeatherResponse: NSManagedObject, Mappable {
+class WeatherResponseCoreData: NSManagedObject, Mappable {
 
     var data: Data?
     
@@ -45,4 +46,39 @@ class WeatherResponse: NSManagedObject, Mappable {
         weatherDescription <- map["data.current_condition.0.weatherDesc.0.value"]
     }
 
+}
+
+// Realm
+class WeatherResponse: Object, Mappable {
+    
+    var data: Data?
+    
+    dynamic var city: String?
+    dynamic var weatherIconUrl: String?
+    dynamic var observationTime: String?
+    dynamic var humidity: String?
+    dynamic var weatherDescription: String?
+    
+    dynamic var createdDate: NSDate? = nil
+    
+    override static func primaryKey() -> String? {
+        return "city"
+    }
+    
+    required convenience init?(map: Map) {
+        self.init()
+    }
+    
+    func mapping(map: Map) {
+        // in case using tool auto gen model
+        data <- map["data"]
+        
+        // in case manual parse
+        city <- map["data.request.0.query"]
+        weatherIconUrl <- map["data.current_condition.0.weatherIconUrl.0.value"]
+        observationTime <- map["data.current_condition.0.observation_time"]
+        humidity <- map["data.current_condition.0.humidity"]
+        weatherDescription <- map["data.current_condition.0.weatherDesc.0.value"]
+    }
+    
 }
