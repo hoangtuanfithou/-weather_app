@@ -20,7 +20,7 @@ class WeatherResponseCoreData: NSManagedObject, Mappable {
     @NSManaged var humidity: String?
     @NSManaged var weatherDescription: String?
 
-    @NSManaged var createdDate: NSDate?
+    @NSManaged var createdDate: Date?
 
     override init(entity: NSEntityDescription, insertInto context: NSManagedObjectContext?) {
         super.init(entity: entity, insertInto: mainContext)
@@ -30,7 +30,7 @@ class WeatherResponseCoreData: NSManagedObject, Mappable {
         let entity = NSEntityDescription.entity(forEntityName: "Weather", in: mainContext)
         super.init(entity: entity!, insertInto: nil)
         
-        createdDate = NSDate()
+        createdDate = Date()
         mapping(map: map)
     }
 
@@ -59,7 +59,7 @@ class WeatherResponse: Object, Mappable {
     dynamic var humidity: String?
     dynamic var weatherDescription: String?
     
-    dynamic var createdDate: NSDate? = nil
+    dynamic var createdDate: Date? = nil
     
     override static func primaryKey() -> String? {
         return "city"

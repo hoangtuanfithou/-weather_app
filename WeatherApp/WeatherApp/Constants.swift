@@ -17,10 +17,10 @@ let requestKey = "vzkjnx2j5f88vyn5dhvvqkzc"
 let appDelegate = UIApplication.shared.delegate as! AppDelegate
 let mainContext = appDelegate.persistentContainer.viewContext
 
-typealias CmCallback = (Bool, WeatherResponse?) -> Void
+typealias CmCallback = (Bool, [WeatherResponse]?) -> Void
 
 enum DataUsing {
-    case CoreData, UserDefault, Realm, Sqlite
+    case CoreData, UserDefault, Realm, Sqlite, CloudKit
 }
 
-var dataUsing = DataUsing.Realm
+var dataUsing = DataUsing.CloudKit
