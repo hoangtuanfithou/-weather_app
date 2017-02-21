@@ -37,7 +37,14 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
     
     // MARK : UISearchBarDelegate
     public func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
-        histories = WeatherBusiness.getSearchHistories()
+        histories = WeatherBusiness.getSearchHistories(callBack: { (result, weatherResponse) in // call back for using with CloudKit
+            if let weatherResponse = weatherResponse {
+                self.histories = weatherResponse
+                DispatchQueue.main.sync {
+                    self.historyTableView.reloadData()   
+                }
+            }
+        })
         historyTableView.reloadData()
     }
     

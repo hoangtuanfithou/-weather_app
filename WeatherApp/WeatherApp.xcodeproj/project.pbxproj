@@ -12,6 +12,7 @@
 		481C37EF1E4C0367000ED7E6 /* WeatherBusiness.swift in Sources */ = {isa = PBXBuildFile; fileRef = 481C37EE1E4C0367000ED7E6 /* WeatherBusiness.swift */; };
 		481C37F11E4C059D000ED7E6 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 481C37F01E4C059D000ED7E6 /* DetailViewController.swift */; };
 		481C37F81E4C7000000ED7E6 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 481C37F71E4C7000000ED7E6 /* Constants.swift */; };
+		4836F1301E5AC8F300771A56 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4836F12F1E5AC8F300771A56 /* CloudKit.framework */; };
 		485409EB1E4E2B92005275F0 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 481C37F71E4C7000000ED7E6 /* Constants.swift */; };
 		485409ED1E4E2B92005275F0 /* CurrentCondition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 487743841E4B3F0500ECC3F7 /* CurrentCondition.swift */; };
 		485409EE1E4E2B92005275F0 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 487743851E4B3F0500ECC3F7 /* Data.swift */; };
@@ -73,6 +74,8 @@
 		481C37EE1E4C0367000ED7E6 /* WeatherBusiness.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherBusiness.swift; sourceTree = "<group>"; };
 		481C37F01E4C059D000ED7E6 /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		481C37F71E4C7000000ED7E6 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		4836F12E1E5AC8AC00771A56 /* WeatherApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WeatherApp.entitlements; sourceTree = "<group>"; };
+		4836F12F1E5AC8F300771A56 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		4877434F1E4B35BA00ECC3F7 /* WeatherApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WeatherApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		487743521E4B35BA00ECC3F7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		487743541E4B35BA00ECC3F7 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
@@ -104,6 +107,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7AC628091E526834479643A1 /* Pods_WeatherApp.framework in Frameworks */,
+				4836F1301E5AC8F300771A56 /* CloudKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -189,6 +193,7 @@
 		487743511E4B35BA00ECC3F7 /* WeatherApp */ = {
 			isa = PBXGroup;
 			children = (
+				4836F12E1E5AC8AC00771A56 /* WeatherApp.entitlements */,
 				481C37F61E4C6FE2000ED7E6 /* Core */,
 				487743831E4B3F0500ECC3F7 /* Model */,
 				481C37F21E4C05A7000ED7E6 /* ViewController */,
@@ -242,6 +247,7 @@
 		7A6F7A4739663C8CB1CBA895 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4836F12F1E5AC8F300771A56 /* CloudKit.framework */,
 				31532FB5F1D38C6F23F6C442 /* Pods_WeatherApp.framework */,
 				DA32481F749038BA095CF3F6 /* Pods_WeatherAppTests.framework */,
 				1A67B454FFD15586149A068B /* Pods_WeatherAppUITests.framework */,
@@ -275,6 +281,7 @@
 				4877434D1E4B35BA00ECC3F7 /* Resources */,
 				718AE43F5BABE6F3656914A9 /* [CP] Embed Pods Frameworks */,
 				AECD15BD49CF13CD35CFFD01 /* [CP] Copy Pods Resources */,
+				48FAC7361E5C181200EB5039 /* Run Script */,
 			);
 			buildRules = (
 			);
@@ -339,8 +346,16 @@
 				TargetAttributes = {
 					4877434E1E4B35BA00ECC3F7 = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = U5AULG6ERT;
+						DevelopmentTeam = P82S49663G;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Push = {
+								enabled = 1;
+							};
+							com.apple.iCloud = {
+								enabled = 1;
+							};
+						};
 					};
 					487743651E4B35BA00ECC3F7 = {
 						CreatedOnToolsVersion = 8.2.1;
@@ -433,6 +448,20 @@
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
+		};
+		48FAC7361E5C181200EB5039 /* Run Script */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Run Script";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/SwiftLint/swiftlint\"";
 		};
 		718AE43F5BABE6F3656914A9 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -725,10 +754,12 @@
 			baseConfigurationReference = 1D0CDC427A8796025124D71F /* Pods-WeatherApp.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = U5AULG6ERT;
+				CODE_SIGN_ENTITLEMENTS = WeatherApp/WeatherApp.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = P82S49663G;
 				INFOPLIST_FILE = WeatherApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = mine.WeatherApp;
+				PRODUCT_BUNDLE_IDENTIFIER = mine.WeatherApp.test;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -739,10 +770,12 @@
 			baseConfigurationReference = 12785722848005653893744B /* Pods-WeatherApp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = U5AULG6ERT;
+				CODE_SIGN_ENTITLEMENTS = WeatherApp/WeatherApp.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = P82S49663G;
 				INFOPLIST_FILE = WeatherApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = mine.WeatherApp;
+				PRODUCT_BUNDLE_IDENTIFIER = mine.WeatherApp.test;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
