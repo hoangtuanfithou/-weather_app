@@ -122,15 +122,15 @@ class WeatherBusiness {
     
     // MARK : Search history using Realm
     private class func saveSearchHistoryRealm(weatherResponse: WeatherResponse) {
-        let realm = try! Realm()
-        try! realm.write() {
+        let realm = try! Realm() // swiftlint:disable:this force_try
+        try! realm.write() { // swiftlint:disable:this force_try
             weatherResponse.createdDate = Date()
             realm.add(weatherResponse)
         }
     }
     
     private class func getSearchHistoriesRealm() -> [WeatherResponse] {
-        let realm = try! Realm()
+        let realm = try! Realm() // swiftlint:disable:this force_try
         let weathers = realm.objects(WeatherResponse.self).sorted(byKeyPath: "createdDate", ascending: false)
         return Array(weathers)
     }

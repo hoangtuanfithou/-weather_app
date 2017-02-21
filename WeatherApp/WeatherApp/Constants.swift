@@ -14,7 +14,7 @@ let maxHistoryNumber = 10
 let weatherUrl = "http://api.worldweatheronline.com/free/v1/weather.ashx"
 let requestKey = "vzkjnx2j5f88vyn5dhvvqkzc"
 
-let appDelegate = UIApplication.shared.delegate as! AppDelegate
+let appDelegate = UIApplication.shared.delegate as! AppDelegate // swiftlint:disable:this force_cast
 let mainContext = appDelegate.persistentContainer.viewContext
 
 typealias CmCallback = (Bool, [WeatherResponse]?) -> Void
